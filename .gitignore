@@ -1,1 +1,8 @@
+# Node
+node_modules/
+
+# Env
 .env
+
+# Firebase / Google Cloud secrets
+config/*.json
