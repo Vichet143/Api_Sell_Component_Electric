@@ -1,8 +1,51 @@
 # Node
 node_modules/
+dist/
+build/
 
 # Env
 .env
+.env.local
+.env.*.local
 
-# Firebase 
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+coverage/
+.nyc_output/
+logs/
+*.log
+
+# Package manager
+.pnp/
+.pnp.js
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keys / certs / secrets
+*.pem
+*.key
+*.p12
+secret*.json
+src/config/sell-electric-firebase-adminsdk-fbsvc-5b963ebe55.json
 config/*.json
+
+*.local
+
+/.vscode/
+.idea/
+/.history/
+.cache/
+/.sass-cache
+/.parcel-cache
+/.turbo
+/.next/
+/.expo/
+/.firebase/
+
+npm-debug.log
+yarn-error.log
