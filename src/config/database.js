@@ -2,7 +2,7 @@ import "dotenv/config";
 import admin from "firebase-admin";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import serviceAccount from "./sell-electric-firebase-adminsdk-fbsvc-5b963ebe55.json" with { type: "json" };
+import serviceAccount from "./sell-electric-firebase-adminsdk-fbsvc-56892b7753.json" with { type: "json" };
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
