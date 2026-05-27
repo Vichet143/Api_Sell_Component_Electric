@@ -35,6 +35,37 @@ class UserController {
       res.status(400).json({ error: error.message });
     }
   }
+  
+  static async updateUser(req, res) {
+    try {
+      const user = await UserService.updateUser(req.query.userId, req.body);
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  }
+
+  static async resetPassword(req, res) {
+    try {
+      const result = await UserService.resetPassword(req.body.email);
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  }
+
+  static async googleLogin(req, res) {
+    try {
+      const user = await UserService.googleLogin(req.user);
+
+      res.status(200).json({
+        success: true,
+        user,
+      });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  }
 }
 
 export default UserController;
