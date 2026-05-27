@@ -4,5 +4,5 @@ node_modules/
 # Env
 .env
 
-# Firebase / Google Cloud secrets
+# Firebase 
 config/*.json
