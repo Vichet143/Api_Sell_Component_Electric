@@ -40,6 +40,91 @@ class ProductService {
       throw new Error(error.message, "Fail to add product");
     }
   }
+
+  static async updateProduct(productId, productData) {
+    try {
+      const productRef = db.collection("products").doc(productId);
+      const productDoc = await productRef.get();
+
+      if (!productDoc.exists) {
+        throw new Error("Product not found");
+      }
+
+      const updatedData = {
+        ...productDoc.data(),
+        ...productData,
+        updated_at: new Date()
+      };
+
+      await productRef.update(updatedData);
+      return {
+        success: true,
+        message: "Product updated successfully",
+        product: {
+          product_id: productId,
+          ...updatedData
+        }
+      };
+    } catch (error) {
+      throw new Error(error.message, "Fail to update product");
+    }
+  }
+
+  static async deleteProduct(productId) {
+    try {
+      const productRef = db.collection("products").doc(productId);
+      const productDoc = await productRef.get();
+
+      if (!productDoc.exists) {
+        throw new Error("Product not found");
+      }
+
+      await productRef.delete();
+      return {
+        success: true,
+        message: "Product deleted successfully"
+      };
+    } catch (error) {
+      throw new Error(error.message, "Fail to delete product");
+    }
+  }
+
+  static async getAllProducts() {
+    try {
+      const productsSnapshot = await db.collection("products").get();
+      const products = productsSnapshot.docs.map(doc => ({
+        product_id: doc.id,
+        ...doc.data()
+      }));
+      return {
+        success: true,
+        products
+      };
+    } catch (error) {
+      throw new Error(error.message, "Fail to retrieve products");
+    }
+  }
+
+  static async getProductById(productId) {
+    try {
+      const productRef = db.collection("products").doc(productId);
+      const productDoc = await productRef.get();
+
+      if (!productDoc.exists) {
+        throw new Error("Product not found");
+      }
+
+      return {
+        success: true,
+        product: {
+          product_id: productDoc.id,
+          ...productDoc.data()
+        }
+      };
+    } catch (error) {
+      throw new Error(error.message, "Fail to retrieve product");
+    }
+  }
 }
 
 export default ProductService;
