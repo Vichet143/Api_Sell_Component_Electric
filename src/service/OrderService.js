@@ -59,6 +59,29 @@ class OrderService {
       throw new Error(error.message, "Fail to retrieve orders");
     }
   }
+
+  static async updatePaymentStatus(orderId, paymentStatus) {
+    try {
+      const orderRef = db.collection("orders").doc(orderId);
+      const orderDoc = await orderRef.get();
+      if (!orderDoc.exists) {
+        throw new Error("Order not found");
+      }
+
+      await orderRef.update({ payment_status: paymentStatus });
+      return {
+        success: true,
+        message: "Payment status updated successfully",
+        order: {
+          order_id: orderId,
+          ...orderDoc.data(),
+          payment_status: paymentStatus
+        }
+      };
+    } catch (error) {
+      throw new Error(error.message, "Fail to update payment status");
+    }
+  }
 }
 
 export default OrderService;
